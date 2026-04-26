@@ -43,21 +43,13 @@ A Dockerfile is a recipe for creating a Docker image.
 
 ---
 
-## Manual Setup vs Dockerfile
-
-Manual Docker Commands Dockerfile
-Done inside a running container Written as instructions in a file
-Temporary Repeatable
-Easy to forget steps Steps are documented
-Hard to share Easy to share with source code
-Not ideal for real projects Standard practice in real projects
-
----
-
 ## Basic Idea
 
+```text
 Manual Docker commands → temporary container setup
+
 Dockerfile → permanent image-building instructions
+```
 
 ---
 
@@ -85,128 +77,139 @@ CMD ["bash"]
 
 ---
 
-Explanation of the Dockerfile
+## Explanation of the Dockerfile
 
-1. FROM
+### 1. FROM
 
+```dockerfile
 FROM ubuntu:latest
+```
 
 This means:
 
-Start building our image from the Ubuntu base image.
+> Start building our image from the Ubuntu base image.
 
 ---
 
-2. RUN
+### 2. RUN
 
+```dockerfile
 RUN apt update
 RUN apt install python3 -y
+```
 
 This means:
 
-Run these commands while building the image.
+> Run these commands while building the image.
 
 Here, we are updating package information and installing Python.
 
 ---
 
-3. WORKDIR
+### 3. WORKDIR
 
+```dockerfile
 WORKDIR /app
+```
 
 This means:
 
-Set /app as the working directory inside the container.
+> Set /app as the working directory inside the container.
 
 If /app does not exist, Docker creates it automatically.
 
 ---
 
-4. CMD
+### 4. CMD
 
+```dockerfile
 CMD ["bash"]
+```
 
 This means:
 
-When a container starts from this image, run bash by default.
+> When a container starts from this image, run bash by default.
 
 ---
 
-Build the Docker Image
+## Build the Docker Image
 
 After creating the Dockerfile, build the image using:
 
+```bash
 docker build -t my-ubuntu-python .
+```
 
 Explanation:
 
-Part Meaning
-docker build Build a Docker image
--t my-ubuntu-python Give the image a name/tag
-. Use the current directory as the build context
+| Part                  | Meaning                                        |
+| --------------------- | ---------------------------------------------- |
+| `docker build`        | Build a Docker image                           |
+| `-t my-ubuntu-python` | Give the image a name/tag                      |
+| `.`                   | Use the current directory as the build context |
 
 ---
 
-Check the Image
+### Check the Image
 
-docker images
+```bash
+docker image ls
+```
 
 You should see an image like:
 
+```text
 REPOSITORY TAG IMAGE ID CREATED SIZE
 my-ubuntu-python latest abc123... few seconds ago ...
+```
 
 ---
 
-Run a Container from Our Custom Image
+### Run a Container from Our Custom Image
 
+```bash
 docker run -it my-ubuntu-python
+```
 
 Now you are inside a container created from your own image.
 
 Try:
 
+```bash
 python3 --version
 pwd
+```
 
 Expected idea:
 
+```text
 Python is already installed
 Current directory is /app
+```
 
 ---
 
-Full Flow
+### Full Flow
 
+```text
 Write Dockerfile
 ↓
 Build Docker image
 ↓
 Run Docker container
+```
 
 ---
 
-Classroom Analogy
-
-Dockerfile = recipe
-Docker image = prepared food package
-Docker container = food being served/running
-
-Another way:
-
-Dockerfile = instructions
-Docker image = packaged application
-Docker container = running application
-
----
-
-Important Point
+### Important Point
 
 Until now, we used Docker images created by others, such as:
 
+```text
 ubuntu
 nginx
 hello-world
+```
 
 With a Dockerfile, we create our own image with:
 
@@ -218,12 +221,8 @@ With a Dockerfile, we create our own image with:
 
 ---
 
-Final Student-Friendly Summary
+## Final Student-Friendly Summary
 
 After learning how to run containers from existing images, the next step is to learn how to create our own images using a Dockerfile.
 
 A Dockerfile allows us to define all setup steps once, build an image from it, and run containers consistently on any machine that has Docker.
-
-```
-
-```
