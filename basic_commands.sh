@@ -79,3 +79,13 @@ docker exec -it <container_id_or_name> <command>
 docker exec -it my_ubuntu_container ls /
 
 
+# 15. Build image from a Dockerfile
+docker build -t <image_name>:<tag> <path_to_parent_dir_of_dockerfile>
+docker build -t simple_ls:latest ~/GitHub/devops/docker-from-first-principles/Dockerfiles/simple_ls
+
+
+
+
+
+
+

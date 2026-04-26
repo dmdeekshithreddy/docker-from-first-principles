@@ -28,4 +28,4 @@
 
 ---
 
-5. Docker container stopped automatically
+5.
